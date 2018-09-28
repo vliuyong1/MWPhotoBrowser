@@ -6,7 +6,7 @@
 //  Copyright 2010 d3i. All rights reserved.
 //
 
-#import <SDWebImage/SDWebImageDecoder.h>
+//#import <SDWebImage/SDWebImageDecoder.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/SDWebImageOperation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -213,8 +213,12 @@
 // Load from local file
 - (void)_performLoadUnderlyingImageAndNotifyWithWebURL:(NSURL *)url {
     @try {
-        
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//        [[SDWebImageDownloader sharedDownloader]downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//
+//        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//
+//        }];
+        [[SDWebImageDownloader sharedDownloader]downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             
             if (expectedSize > 0) {
                 float progress = receivedSize / (float)expectedSize;
@@ -223,7 +227,7 @@
                 
             }
             
-        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             
             if (error) {
                 MWLog(@"SDWebImage failed to download image: %@", error);
